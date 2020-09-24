@@ -1,8 +1,9 @@
-import { getRepository, Repository } from 'typeorm';
+import { EntityRepository, getRepository, Repository } from 'typeorm';
 import { ICreateHospitalDTO } from '../DTOs/ICreateHospitalDTO';
 import { Hospital } from '../entities/Hospital';
 import { IHospitalRepository } from './IHospitalRepository';
 
+@EntityRepository(Hospital)
 class HospitalRepository implements IHospitalRepository {
   private ormRepository: Repository<Hospital>;
 
