@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../errors/AppError';
 import { Hospital } from '../entities/Hospital';
 import { IHospitalRepository } from '../repositories/IHospitalRepository';
 
@@ -24,7 +25,7 @@ class CreateHospitalService {
     const exists = await this.hospitalRepository.findByCNPJ(cnpj);
 
     if (exists) {
-      throw new Error('CNJ açready registered');
+      throw new AppError('CNJ açready registered');
     }
 
     const hospital = await this.hospitalRepository.create({

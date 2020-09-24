@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../errors/AppError';
 import { Hospital } from '../entities/Hospital';
 import { IHospitalRepository } from '../repositories/IHospitalRepository';
 
@@ -13,7 +14,7 @@ class ShowOneHospitalService {
     const hospital = await this.hospitalRepository.findById(id);
 
     if (!hospital) {
-      throw new Error('ID does not exists');
+      throw new AppError('ID does not exists');
     }
 
     return hospital;

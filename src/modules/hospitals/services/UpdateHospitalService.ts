@@ -1,4 +1,5 @@
 import { inject, injectable } from 'tsyringe';
+import AppError from '../../../errors/AppError';
 import { Hospital } from '../entities/Hospital';
 import { IHospitalRepository } from '../repositories/IHospitalRepository';
 
@@ -25,7 +26,7 @@ class UpdateHospitalService {
     const hospital = await this.hospitalRepository.findById(id);
 
     if (!hospital) {
-      throw new Error('Hospital does not exist');
+      throw new AppError('Hospital does not exist');
     }
 
     const {
