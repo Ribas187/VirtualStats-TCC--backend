@@ -22,6 +22,12 @@ class HospitalRepository implements IHospitalRepository {
     return hospital;
   }
 
+  public async findByEmail(email: string): Promise<Hospital | undefined> {
+    const hospital = await this.ormRepository.findOne({ where: { email } });
+
+    return hospital;
+  }
+
   public async findAll(): Promise<Hospital[]> {
     const hospitais = await this.ormRepository.find();
 
@@ -38,6 +44,10 @@ class HospitalRepository implements IHospitalRepository {
 
   public async save(hospital: Hospital): Promise<Hospital> {
     return this.ormRepository.save(hospital);
+  }
+
+  public async delete(hospitalData: Hospital): Promise<Hospital> {
+    return this.ormRepository.remove(hospitalData);
   }
 }
 
