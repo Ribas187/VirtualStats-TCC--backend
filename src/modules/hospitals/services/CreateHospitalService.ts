@@ -25,7 +25,7 @@ class CreateHospitalService {
     const exists = await this.hospitalRepository.findByCNPJ(cnpj);
 
     if (exists) {
-      throw new AppError('CNJ açready registered');
+      throw new AppError('CNPJ already registered');
     }
 
     const hospital = await this.hospitalRepository.create({
