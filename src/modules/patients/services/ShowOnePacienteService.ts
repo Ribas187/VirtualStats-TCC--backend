@@ -10,11 +10,11 @@ class ShowOnePacienteService {
     private pacientesRepository: IPacientesRepository,
   ) {}
 
-  public async execute(id: number): Promise<Paciente> {
-    const paciente = await this.pacientesRepository.findById(id);
+  public async execute(cod: string): Promise<Paciente> {
+    const paciente = await this.pacientesRepository.findByCod(cod);
 
     if (!paciente) {
-      throw new AppError('Patient ID does not exist');
+      throw new AppError('Patient CODE does not exist');
     }
 
     return paciente;
