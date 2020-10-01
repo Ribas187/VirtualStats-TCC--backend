@@ -32,7 +32,7 @@ class Status {
 
   @ManyToOne(() => Paciente, { eager: true })
   @JoinColumn({ name: 'id_paciente' })
-  hospital: Paciente;
+  paciente: Paciente;
 }
 
 export { Status };
