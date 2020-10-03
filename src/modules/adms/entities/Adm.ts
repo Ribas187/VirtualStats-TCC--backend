@@ -10,7 +10,7 @@ import { Hospital } from '../../hospitals/entities/Hospital';
 @Entity('Adm')
 class Adm {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column()
   nome: string;

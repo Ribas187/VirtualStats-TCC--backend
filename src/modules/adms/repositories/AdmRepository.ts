@@ -10,8 +10,16 @@ class AdmRepository implements IAdmRepository {
     this.ormRepository = getRepository(Adm);
   }
 
+  public async findById(id: number): Promise<Adm | undefined> {
+    return this.ormRepository.findOne(id);
+  }
+
   public async findByEmail(email: string): Promise<Adm | undefined> {
     return this.ormRepository.findOne({ where: { email } });
+  }
+
+  public async save(admData: Omit<Adm, 'hospital'>): Promise<Adm> {
+    return this.ormRepository.save(admData);
   }
 
   public async create(admData: ICreateAdmDTO): Promise<Adm> {
