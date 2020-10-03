@@ -1,4 +1,10 @@
 import { container } from 'tsyringe';
+
+import '../modules/adms/providers';
+
+import { AdmRepository } from '../modules/adms/repositories/AdmRepository';
+import { IAdmRepository } from '../modules/adms/repositories/IAdmRepository';
+
 import { HospitalRepository } from '../modules/hospitals/repositories/HospitalRepository';
 import { IHospitalRepository } from '../modules/hospitals/repositories/IHospitalRepository';
 
@@ -22,3 +28,5 @@ container.registerSingleton<IStatsRepository>(
   'StatsRepository',
   StatsRepository,
 );
+
+container.registerSingleton<IAdmRepository>('AdmRepository', AdmRepository);
