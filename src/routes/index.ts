@@ -11,7 +11,7 @@ const routes = Router();
 routes.use('/hospitals', hospitalRoutes);
 routes.use('/patients', pacientesRoutes);
 routes.use('/stats', statsRoutes);
-routes.use('/stats/patient', statsPacienteRoutes);
+routes.use('/stats-patient', statsPacienteRoutes);
 routes.use('/session', sessionRoutes);
 routes.use('/adm', admRoutes);
 
