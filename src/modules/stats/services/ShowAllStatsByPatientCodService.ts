@@ -5,7 +5,7 @@ import { Status } from '../entities/Status';
 import { IStatsRepository } from '../repositories/IStatsRepository';
 
 @injectable()
-class ShowAllStatsByPatientIdService {
+class ShowAllStatsByPatientCodService {
   constructor(
     @inject('StatsRepository')
     private statsRepository: IStatsRepository,
@@ -14,17 +14,17 @@ class ShowAllStatsByPatientIdService {
     private pacientesRepository: IPacientesRepository,
   ) {}
 
-  public async execute(id: number): Promise<Status[]> {
-    const patientExists = await this.pacientesRepository.findById(id);
+  public async execute(cod: string): Promise<Status[]> {
+    const patientExists = await this.pacientesRepository.findByCod(cod);
 
     if (!patientExists) {
-      throw new AppError('Patient ID does not exist');
+      throw new AppError('Patient code does not exist');
     }
 
-    const stats = await this.statsRepository.findByPatientId(id);
+    const stats = await this.statsRepository.findByPatientId(patientExists.id);
 
     return stats;
   }
 }
 
-export { ShowAllStatsByPatientIdService };
+export { ShowAllStatsByPatientCodService };

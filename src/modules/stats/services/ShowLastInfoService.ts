@@ -14,14 +14,14 @@ class ShowLastInfoService {
     private pacientesRepository: IPacientesRepository,
   ) {}
 
-  public async execute(id: number): Promise<Status> {
-    const patientExists = await this.pacientesRepository.findById(id);
+  public async execute(cod: string): Promise<Status> {
+    const patientExists = await this.pacientesRepository.findByCod(cod);
 
     if (!patientExists) {
-      throw new AppError('Patient ID does not exist');
+      throw new AppError('Patient code does not exist');
     }
 
-    const status = await this.statsRepository.findLastStats(id);
+    const status = await this.statsRepository.findLastStats(patientExists.id);
 
     return status;
   }
