@@ -18,7 +18,10 @@ class StatsRepository implements IStatsRepository {
   }
 
   public async findByPatientId(id: number): Promise<Status[]> {
-    const stats = await this.ormRepository.find({ where: { id_paciente: id } });
+    const stats = await this.ormRepository.find({
+      where: { id_paciente: id },
+      order: { hora: 'DESC' },
+    });
 
     return stats;
   }
