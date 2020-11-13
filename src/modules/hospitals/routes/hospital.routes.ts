@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { ensureAuthenticated } from '../../adms/middlewares/ensureAuthenticated';
 import { HospitalController } from '../controllers/HospitalController';
 
 const hospitalRoutes = Router();
@@ -9,6 +10,7 @@ hospitalRoutes.get('/', hospitalController.index);
 // Mostra um registro baseado no id
 hospitalRoutes.get('/:id', hospitalController.show);
 
+hospitalRoutes.use(ensureAuthenticated);
 // Cria um novo registro
 hospitalRoutes.post('/', hospitalController.create);
 // Edita um registro baseado no id
