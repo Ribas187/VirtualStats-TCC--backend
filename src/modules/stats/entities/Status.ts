@@ -10,7 +10,7 @@ import { Paciente } from '../../patients/entities/Paciente';
 @Entity('Stats')
 class Status {
   @PrimaryGeneratedColumn('increment')
-  id: string;
+  id: number;
 
   @Column()
   estado: string;

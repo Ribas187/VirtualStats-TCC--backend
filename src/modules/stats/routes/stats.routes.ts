@@ -10,4 +10,6 @@ statsRoutes.get('/:cod_paciente/:id', statsController.show);
 statsRoutes.use(ensureAuthenticated);
 statsRoutes.post('/:id_paciente', statsController.create);
 
+statsRoutes.put('/:id', statsController.update);
+
 export { statsRoutes };

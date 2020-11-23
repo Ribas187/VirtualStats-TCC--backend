@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateStatusService } from '../services/CreateStatusService';
 import { ShowStatusByIdService } from '../services/ShowStatusByIdService';
+import { UpdateStatusService } from '../services/UpdateStatusService';
 
 class StatsController {
   public async show(req: Request, res: Response): Promise<Response> {
@@ -30,6 +31,24 @@ class StatsController {
       observacao,
       medicamento,
       id_paciente: Number(id_paciente),
+    });
+
+    return res.json(status);
+  }
+
+  public async update(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { alimentacao, estado, hora, medicamento, observacao } = req.body;
+
+    const updateService = container.resolve(UpdateStatusService);
+
+    const status = await updateService.execute({
+      id: Number(id),
+      alimentacao,
+      estado,
+      hora,
+      medicamento,
+      observacao,
     });
 
     return res.json(status);
