@@ -29,6 +29,12 @@ class PacientesRepository implements IPacientesRepository {
     return paciente;
   }
 
+  public async findByRG(rg: string): Promise<Paciente | undefined> {
+    const paciente = await this.ormRepository.findOne({ where: { RG: rg } });
+
+    return paciente;
+  }
+
   public async findAll(): Promise<Paciente[]> {
     const pacientes = await this.ormRepository.find();
 

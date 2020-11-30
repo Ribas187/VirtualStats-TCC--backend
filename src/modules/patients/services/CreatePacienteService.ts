@@ -31,11 +31,17 @@ class CreatePacienteService {
   ) {}
 
   public async execute(data: IRequest): Promise<Paciente> {
-    const { email, id_hospital } = data;
+    const { email, id_hospital, RG } = data;
 
     const pacienteExist = await this.pacientesRepository.findByEmail(email);
 
     if (pacienteExist) {
+      throw new AppError('Patient already exists');
+    }
+
+    const pacienteRGExist = await this.pacientesRepository.findByRG(RG);
+
+    if (pacienteRGExist) {
       throw new AppError('Patient already exists');
     }
 
