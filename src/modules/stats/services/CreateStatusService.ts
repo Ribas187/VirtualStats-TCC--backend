@@ -30,7 +30,10 @@ class CreateStatusService {
       throw new AppError('Patient has already an status at this time');
     }
 
-    const status = await this.statsRepository.create(data);
+    const status = await this.statsRepository.create({
+      ...data,
+      hora: new Date(),
+    });
 
     return status;
   }
