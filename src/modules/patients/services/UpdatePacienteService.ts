@@ -52,6 +52,12 @@ class UpdatePacienteService {
       throw new AppError('E-mail already in use');
     }
 
+    const pacienteRGExist = await this.pacientesRepository.findByRG(RG);
+
+    if (pacienteRGExist && RG !== paciente.RG) {
+      throw new AppError('Patient already exists');
+    }
+
     const checkHospitalId = await this.hospitalRepository.findById(id_hospital);
 
     if (!checkHospitalId) {
