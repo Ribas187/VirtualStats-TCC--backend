@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { CreateStatusService } from '../services/CreateStatusService';
+import { DeleteStatusService } from '../services/DeleteStatusService';
 import { ShowStatusByIdService } from '../services/ShowStatusByIdService';
 import { UpdateStatusService } from '../services/UpdateStatusService';
 
@@ -52,6 +53,16 @@ class StatsController {
     });
 
     return res.json(status);
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const deleteService = container.resolve(DeleteStatusService);
+
+    const deleted = await deleteService.execute(Number(id));
+
+    return res.json(deleted);
   }
 }
 

@@ -12,4 +12,6 @@ statsRoutes.post('/:id_paciente', statsController.create);
 
 statsRoutes.put('/:id', statsController.update);
 
+statsRoutes.delete('/:id', statsController.delete);
+
 export { statsRoutes };

@@ -9,4 +9,5 @@ export interface IStatsRepository {
   findAll(): Promise<Status[]>;
   save(data: Omit<Status, 'paciente'>): Promise<Status>;
   create(data: ICreateStatusDTO): Promise<Status>;
+  delete(data: Status): Promise<Status>;
 }

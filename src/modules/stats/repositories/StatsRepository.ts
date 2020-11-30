@@ -60,6 +60,10 @@ class StatsRepository implements IStatsRepository {
 
     return stats;
   }
+
+  public async delete(statsData: Status): Promise<Status> {
+    return this.ormRepository.remove(statsData);
+  }
 }
 
 export { StatsRepository };
