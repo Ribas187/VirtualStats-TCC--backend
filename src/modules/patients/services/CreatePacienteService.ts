@@ -52,7 +52,7 @@ class CreatePacienteService {
       cod: codPaciente,
     });
 
-    await this.statsRepository.create({
+    const stats = await this.statsRepository.create({
       alimentacao: 'Sem dados',
       estado: 'Sem dados',
       hora: new Date(),
@@ -60,6 +60,8 @@ class CreatePacienteService {
       medicamento: 'Sem dados',
       observacao: 'Paciente criado',
     });
+
+    console.log(stats);
 
     return paciente;
   }
