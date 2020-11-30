@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { uuid } from 'uuidv4';
 import AppError from '../../../errors/AppError';
 import { IHospitalRepository } from '../../hospitals/repositories/IHospitalRepository';
+import { IStatsRepository } from '../../stats/repositories/IStatsRepository';
 import { Paciente } from '../entities/Paciente';
 import { IPacientesRepository } from '../repositories/IPacientesRepository';
 
@@ -21,6 +22,9 @@ class CreatePacienteService {
   constructor(
     @inject('PacientesRepository')
     private pacientesRepository: IPacientesRepository,
+
+    @inject('StatsRepository')
+    private statsRepository: IStatsRepository,
 
     @inject('HospitalRepository')
     private hospitalRepository: IHospitalRepository,
@@ -46,6 +50,15 @@ class CreatePacienteService {
     const paciente = await this.pacientesRepository.create({
       ...data,
       cod: codPaciente,
+    });
+
+    await this.statsRepository.create({
+      alimentacao: 'Sem dados',
+      estado: 'Sem dados',
+      hora: new Date(),
+      id_paciente: paciente.id,
+      medicamento: 'Sem dados',
+      observacao: 'Paciente criado',
     });
 
     return paciente;
