@@ -23,6 +23,14 @@ class PacientesRepository implements IPacientesRepository {
     return paciente;
   }
 
+  public async findByHospitalId(id: number): Promise<Paciente[]> {
+    const pacientes = await this.ormRepository.find({
+      where: { id_hospital: id },
+    });
+
+    return pacientes;
+  }
+
   public async findByEmail(email: string): Promise<Paciente | undefined> {
     const paciente = await this.ormRepository.findOne({ where: { email } });
 

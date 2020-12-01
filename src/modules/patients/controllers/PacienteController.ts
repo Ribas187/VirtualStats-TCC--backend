@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import { CreatePacienteService } from '../services/CreatePacienteService';
 import { ShowAllPacientesService } from '../services/ShowAllPacientesService';
 import { ShowOnePacienteService } from '../services/ShowOnePacienteService';
+import { ShowPatientsByHospitalService } from '../services/ShowPatientsByHospitalService';
 import { UpdatePacienteService } from '../services/UpdatePacienteService';
 
 class PacienteController {
@@ -22,6 +23,18 @@ class PacienteController {
     const paciente = await showPaciente.execute(cod);
 
     return res.json(paciente);
+  }
+
+  public async showByHospital(req: Request, res: Response): Promise<Response> {
+    const { hospital_id } = req.params;
+
+    const showByHospitalPaciente = container.resolve(
+      ShowPatientsByHospitalService,
+    );
+
+    const pacientes = await showByHospitalPaciente.execute(Number(hospital_id));
+
+    return res.json(pacientes);
   }
 
   public async create(req: Request, res: Response): Promise<Response> {

@@ -6,6 +6,7 @@ export interface IPacientesRepository {
   findById(id: number): Promise<Paciente | undefined>;
   findByRG(rg: string): Promise<Paciente | undefined>;
   findByCod(cod: string): Promise<Paciente | undefined>;
+  findByHospitalId(id: number): Promise<Paciente[]>;
   findAll(): Promise<Paciente[]>;
   save(data: Omit<Paciente, 'hospital'>): Promise<Paciente>;
   create(data: ICreatePacienteDTO): Promise<Paciente>;
