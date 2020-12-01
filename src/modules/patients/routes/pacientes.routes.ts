@@ -13,7 +13,10 @@ pacientesRoutes.use(ensureAuthenticated);
 // Lista todos os pacientes
 pacientesRoutes.get('/', pacienteController.index);
 
-pacientesRoutes.get('/:hospital_id', pacienteController.showByHospital);
+pacientesRoutes.get(
+  '/hospital/:hospital_id',
+  pacienteController.showByHospital,
+);
 
 // Cria um registro
 pacientesRoutes.post('/', pacienteController.create);
